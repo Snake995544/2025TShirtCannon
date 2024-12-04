@@ -11,11 +11,11 @@ import wpilib.drive
 import phoenix5
 import constants
 import math
-import limelight 
 import commands2
 import typing
 
 from robotcontainer import RobotContainer
+from commands.limelightDrive import limelightDriveCommand
 
 class MyRobot(commands2.TimedCommandRobot):
     """
@@ -24,11 +24,13 @@ class MyRobot(commands2.TimedCommandRobot):
     """  
 
     autonomousCommand: typing.Optional[commands2.Command] = None
-
     def robotInit(self):
         """Robot initialization function"""
-
         self.container = RobotContainer()
+        self.drive = limelightDriveCommand(self.container.drivetrain, self.container.limelight)
     def teleopPeriodic(self):
         commands2.CommandScheduler.getInstance().run()
-            
+    def autonomousInit(self):
+        self.drive.schedule()
+    def autonomousPeriodic(self):
+        commands2.CommandScheduler.getInstance().run()
