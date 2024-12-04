@@ -20,6 +20,6 @@ class limelightSystem(commands2.Subsystem):
         results = self.limelight.get_results()
 
         if results["botpose_tagcount"] == 0:
-            return
+            return False
 
         return limelightResults(results)
