@@ -1,8 +1,9 @@
-import commands2
 import typing
+
+import commands2
 from subsystems.drivetrain import arcadeDrive
 
-class ArcadeDrive(commands2.CommandBase):
+class ArcadeDrive(commands2.Command):
     def __init__(self, arcade_drive: arcadeDrive, y: typing.Callable[[], float], z: typing.Callable[[], float]) -> None:
         super().__init__()
         self.arcade_drive = arcade_drive
@@ -16,5 +17,5 @@ class ArcadeDrive(commands2.CommandBase):
     def isFinished(self) -> bool:
         return False
     
-    def end(self) -> None:
+    def end(self, interrupted=False) -> None:
         self.arcade_drive.arcadeDrive(0, 0)

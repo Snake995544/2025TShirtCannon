@@ -2,7 +2,7 @@ import commands2
 import typing
 from subsystems.limelight import limelightSystem
 
-class limelightDisplay(commands2.CommandBase):
+class limelightDisplay(commands2.Command):
     def __init__(self, limelight: limelightSystem) -> None:
         super().__init__()
         self.limelight = limelight
@@ -16,5 +16,5 @@ class limelightDisplay(commands2.CommandBase):
     def isFinished(self) -> bool:
         return False
     
-    def end(self) -> None:
+    def end(self, interrupted=False) -> None:
         pass
